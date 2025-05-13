@@ -1,0 +1,174 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ChatnLearn</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700&display=swap" rel="stylesheet">
+  <style>
+    body {
+      font-family: 'Nunito', sans-serif;
+      background: linear-gradient(to bottom, #fafbfc, #f5f7fa);
+    }
+    .card-hover {
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+    .card-hover:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 10px 25px rgba(79, 70, 229, 0.15);
+    }
+    .btn-primary {
+      background: linear-gradient(135deg, #4f46e5, #6366f1);
+      transition: all 0.3s ease;
+    }
+    .btn-primary:hover {
+      background: linear-gradient(135deg, #3730a3, #4f46e5);
+      transform: translateY(-2px);
+      box-shadow: 0 4px 12px rgba(79, 70, 229, 0.25);
+    }
+  </style>
+</head>
+<body class="min-h-screen flex flex-col">
+  <!-- Header -->
+  <header class="bg-white shadow-md py-4 px-6 md:px-10">
+    <div class="max-w-7xl mx-auto flex justify-between items-center">
+      <div class="flex items-center space-x-2 text-indigo-600 font-bold text-xl">
+        <span class="text-2xl">💬</span>
+        <span>ChatnLearn</span>
+      </div>
+      
+      <!-- Mobile menu button -->
+      <div class="md:hidden">
+        <button id="mobile-menu-button" class="text-gray-600 focus:outline-none">
+          <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
+          </svg>
+        </button>
+      </div>
+      
+      <!-- Desktop navigation -->
+      <nav class="hidden md:flex items-center space-x-6">
+        <a href="#" class="text-gray-700 hover:text-indigo-600 transition-colors">Dashboard</a>
+        <a href="#" class="text-gray-700 hover:text-indigo-600 transition-colors">Topic Selection</a>
+        <a href="#" class="text-gray-700 hover:text-indigo-600 transition-colors">AI Video Chat</a>
+        <a href="#" class="text-gray-700 hover:text-indigo-600 transition-colors">Feedback</a>
+      </nav>
+    </div>
+    
+    <!-- Mobile navigation -->
+    <div id="mobile-menu" class="hidden md:hidden mt-4 pb-2">
+      <a href="#" class="block py-2 text-gray-700 hover:text-indigo-600 transition-colors">Dashboard</a>
+      <a href="#" class="block py-2 text-gray-700 hover:text-indigo-600 transition-colors">Topic Selection</a>
+      <a href="#" class="block py-2 text-gray-700 hover:text-indigo-600 transition-colors">AI Video Chat</a>
+      <a href="#" class="block py-2 text-gray-700 hover:text-indigo-600 transition-colors">Feedback</a>
+    </div>
+  </header>
+
+  <!-- Main content -->
+  <main class="flex-1 flex flex-col items-center px-6 py-12 md:py-16">
+    <h1 class="text-3xl md:text-4xl font-bold text-gray-800 mb-12 text-center">Welcome to ChatnLearn</h1>
+    
+    <div class="w-full max-w-6xl flex flex-col md:flex-row justify-center gap-8 md:gap-12">
+      <!-- Card 1 -->
+      <div class="card-hover bg-white rounded-2xl shadow-lg p-8 flex flex-col items-center max-w-md w-full">
+        <div class="w-32 h-32 mb-6">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 500 500" class="w-full h-full">
+            <path fill="#e6e6e6" d="M419.88 159.56L376.48 103.54L358.41 117.16L401.8 173.18L419.88 159.56Z"/>
+            <path fill="#f2f2f2" d="M331.46 202.19L288.06 146.17L269.99 159.79L313.39 215.81L331.46 202.19Z"/>
+            <path fill="#4f46e5" d="M376.48 103.54L288.06 146.17L331.46 202.19L419.88 159.56L376.48 103.54Z"/>
+            <path fill="#3f3d56" d="M234.27 386.86H143.11V387.86H234.27V386.86Z"/>
+            <path fill="#3f3d56" d="M234.27 299.86H143.11V300.86H234.27V299.86Z"/>
+            <path fill="#3f3d56" d="M234.27 343.86H143.11V344.86H234.27V343.86Z"/>
+            <path fill="#4f46e5" d="M255.35 180.73H121.35V388.73H255.35V180.73Z" opacity="0.2"/>
+            <path fill="#3f3d56" d="M247.35 188.73H129.35V380.73H247.35V188.73Z"/>
+            <path fill="#ffffff" d="M224.35 214.73H152.35V223.73H224.35V214.73Z"/>
+            <path fill="#ffffff" d="M224.35 256.73H152.35V265.73H224.35V256.73Z"/>
+            <path fill="#ffffff" d="M224.35 300.73H152.35V309.73H224.35V300.73Z"/>
+            <path fill="#ffffff" d="M224.35 344.73H152.35V353.73H224.35V344.73Z"/>
+            <circle cx="140.35" cy="219.23" r="5" fill="#4f46e5"/>
+            <circle cx="140.35" cy="262.23" r="5" fill="#4f46e5"/>
+            <circle cx="140.35" cy="305.23" r="5" fill="#4f46e5"/>
+            <circle cx="140.35" cy="348.23" r="5" fill="#4f46e5"/>
+            <path fill="#3f3d56" d="M380.15 186.23H268.15V325.23H380.15V186.23Z"/>
+            <path fill="#ffffff" d="M369.15 196.23H279.15V315.23H369.15V196.23Z"/>
+            <path fill="#4f46e5" d="M354.15 228.23H294.15V230.23H354.15V228.23Z"/>
+            <path fill="#4f46e5" d="M354.15 235.23H294.15V237.23H354.15V235.23Z"/>
+            <path fill="#4f46e5" d="M354.15 242.23H294.15V244.23H354.15V242.23Z"/>
+            <path fill="#4f46e5" d="M354.15 249.23H294.15V251.23H354.15V249.23Z"/>
+            <path fill="#4f46e5" d="M354.15 256.23H294.15V258.23H354.15V256.23Z"/>
+            <path fill="#4f46e5" d="M354.15 263.23H294.15V265.23H354.15V263.23Z"/>
+            <path fill="#4f46e5" d="M354.15 270.23H294.15V272.23H354.15V270.23Z"/>
+            <path fill="#4f46e5" d="M354.15 277.23H294.15V279.23H354.15V277.23Z"/>
+          </svg>
+        </div>
+        <h2 class="text-xl font-bold text-indigo-600 mb-3">Talk to Learn</h2>
+        <p class="text-gray-600 text-center mb-6">Engage in interactive conversations to enhance your learning experience and gain new insights.</p>
+        <button class="btn-primary text-white font-semibold py-3 px-8 rounded-full">Start Talking</button>
+      </div>
+      
+      <!-- Card 2 -->
+      <div class="card-hover bg-white rounded-2xl shadow-lg p-8 flex flex-col items-center max-w-md w-full">
+        <div class="w-32 h-32 mb-6">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 500 500" class="w-full h-full">
+            <path fill="#f2f2f2" d="M415.35 282.35H84.65V124.65H415.35V282.35Z"/>
+            <path fill="#ffffff" d="M404.35 270.35H95.65V136.65H404.35V270.35Z"/>
+            <path fill="#4f46e5" d="M216.35 234.65H123.65V252.65H216.35V234.65Z" opacity="0.3"/>
+            <path fill="#4f46e5" d="M216.35 201.65H123.65V219.65H216.35V201.65Z" opacity="0.3"/>
+            <path fill="#4f46e5" d="M216.35 168.65H123.65V186.65H216.35V168.65Z" opacity="0.3"/>
+            <path fill="#4f46e5" d="M376.35 168.65H246.35V252.65H376.35V168.65Z"/>
+            <path fill="#3f3d56" d="M415.35 282.35H84.65V124.65H415.35V282.35ZM86.65 280.35H413.35V126.65H86.65V280.35Z"/>
+            <path fill="#3f3d56" d="M84.65 140.35H415.35V142.35H84.65V140.35Z"/>
+            <circle cx="98.85" cy="133.55" r="3.5" fill="#4f46e5"/>
+            <circle cx="109.85" cy="133.55" r="3.5" fill="#4f46e5"/>
+            <circle cx="120.85" cy="133.55" r="3.5" fill="#4f46e5"/>
+            <path fill="#3f3d56" d="M291.69 384.15L291.69 307.65L250 307.65L250 384.15L291.69 384.15Z"/>
+            <path fill="#3f3d56" d="M333.38 384.15L333.38 265.96L291.69 265.96L291.69 384.15L333.38 384.15Z"/>
+            <path fill="#3f3d56" d="M375.08 384.15L375.08 307.65L333.38 307.65L333.38 384.15L375.08 384.15Z"/>
+            <path fill="#3f3d56" d="M416.77 384.15L416.77 224.27L375.08 224.27L375.08 384.15L416.77 384.15Z"/>
+            <path fill="#3f3d56" d="M208.31 384.15L208.31 307.65L166.62 307.65L166.62 384.15L208.31 384.15Z"/>
+            <path fill="#3f3d56" d="M166.62 384.15L166.62 265.96L124.92 265.96L124.92 384.15L166.62 384.15Z"/>
+            <path fill="#3f3d56" d="M124.92 384.15L124.92 307.65L83.23 307.65L83.23 384.15L124.92 384.15Z"/>
+            <path fill="#3f3d56" d="M83.23 384.15L83.23 224.27L41.54 224.27L41.54 384.15L83.23 384.15Z"/>
+            <path fill="#3f3d56" d="M437.54 385.15H20.77V387.15H437.54V385.15Z"/>
+            <path fill="#4f46e5" d="M291.69 307.65H250V326.96H291.69V307.65Z" opacity="0.2"/>
+            <path fill="#4f46e5" d="M333.38 265.96H291.69V285.27H333.38V265.96Z" opacity="0.2"/>
+            <path fill="#4f46e5" d="M375.08 307.65H333.38V326.96H375.08V307.65Z" opacity="0.2"/>
+            <path fill="#4f46e5" d="M416.77 224.27H375.08V243.58H416.77V224.27Z" opacity="0.2"/>
+            <path fill="#4f46e5" d="M208.31 307.65H166.62V326.96H208.31V307.65Z" opacity="0.2"/>
+            <path fill="#4f46e5" d="M166.62 265.96H124.92V285.27H166.62V265.96Z" opacity="0.2"/>
+            <path fill="#4f46e5" d="M124.92 307.65H83.23V326.96H124.92V307.65Z" opacity="0.2"/>
+            <path fill="#4f46e5" d="M83.23 224.27H41.54V243.58H83.23V224.27Z" opacity="0.2"/>
+          </svg>
+        </div>
+        <h2 class="text-xl font-bold text-indigo-600 mb-3">Learn to Talk</h2>
+        <p class="text-gray-600 text-center mb-6">Prepare and practice your speaking skills with structured lessons and feedback.</p>
+        <button class="btn-primary text-white font-semibold py-3 px-8 rounded-full">Start Learning</button>
+      </div>
+    </div>
+  </main>
+
+  <!-- Footer -->
+  <footer class="bg-gray-800 text-white py-8 mt-16">
+    <div class="max-w-6xl mx-auto px-6 flex flex-col items-center">
+      <div class="mb-4">
+        <a href="#" class="text-white hover:text-indigo-300 mx-3 transition-colors">Privacy Policy</a>
+        <span class="mx-1">|</span>
+        <a href="#" class="text-white hover:text-indigo-300 mx-3 transition-colors">Terms of Service</a>
+      </div>
+      <div class="text-gray-400 text-sm">© 2023 ChatnLearn. All rights reserved.</div>
+    </div>
+  </footer>
+
+  <script>
+    // Mobile menu toggle
+    const mobileMenuButton = document.getElementById('mobile-menu-button');
+    const mobileMenu = document.getElementById('mobile-menu');
+    
+    mobileMenuButton.addEventListener('click', () => {
+      mobileMenu.classList.toggle('hidden');
+    });
+  </script>
+<script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'93ef0b1832420763',t:'MTc0NzEwNjY3MS4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
+</html>
