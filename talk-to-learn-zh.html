@@ -1,8 +1,8 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="zh-Hant">
 <head>
   <meta charset="UTF-8">
-  <title>ChatnLearn – Talk to Learn</title>
+  <title>ChatnLearn – 通過對話學習</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="icon" type="image/png" href="logo.png">
   <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;700&display=swap" rel="stylesheet">
@@ -83,56 +83,56 @@
   <div id="navbar-placeholder"></div>
 
   <div class="section">
-    <h2>Talk to Learn</h2>
+    <h2>通過對話學習</h2>
     <p class="text-center text-gray-600 max-w-2xl mx-auto mb-8">
-      Choose a topic to start an interactive conversation. Our AI will guide you through the discussion, helping you learn through natural dialogue.
+      選擇一個主題開始互動對話。我們的AI將引導您進行討論，通過自然對話幫助您學習。
     </p>
     
     <div class="topic-grid">
       <div class="topic-card">
-        <span class="subject physics">Physics</span>
-        <h3>Force and Motion</h3>
-        <p>Explore the fundamental principles of force and motion through interactive discussions. Learn about Newton's laws, types of forces, and their effects on objects in motion.</p>
-        <button onclick="startConversation('force-and-motion', 'Force and Motion')" class="px-4 py-2 bg-indigo-600 text-white font-medium rounded-lg hover:bg-indigo-700 transition-colors inline-block">Start Conversation</button>
+        <span class="subject physics">物理</span>
+        <h3>力和運動</h3>
+        <p>通過互動討論探索力和運動的基本原理。學習牛頓定律、各種力的類型以及它們對運動物體的影響。</p>
+        <button onclick="startConversation('force-and-motion', '力和運動')" class="px-4 py-2 bg-indigo-600 text-white font-medium rounded-lg hover:bg-indigo-700 transition-colors inline-block">開始對話</button>
       </div>
 
       <div class="topic-card">
-        <span class="subject history">History</span>
-        <h3>World War II</h3>
-        <p>Dive into the complex events and impacts of World War II. Discuss key battles, political developments, and the lasting effects on global society and international relations.</p>
-        <button onclick="startConversation('world-war-ii', 'World War II')" class="px-4 py-2 bg-indigo-600 text-white font-medium rounded-lg hover:bg-indigo-700 transition-colors inline-block">Start Conversation</button>
+        <span class="subject history">歷史</span>
+        <h3>第二次世界大戰</h3>
+        <p>深入探討二戰的複雜事件和影響。討論關鍵戰役、政治發展以及對全球社會和國際關係的持久影響。</p>
+        <button onclick="startConversation('world-war-ii', '第二次世界大戰')" class="px-4 py-2 bg-indigo-600 text-white font-medium rounded-lg hover:bg-indigo-700 transition-colors inline-block">開始對話</button>
       </div>
 
       <div class="topic-card">
-        <span class="subject economics">Economics</span>
-        <h3>Market Structures</h3>
-        <p>Explore different market structures and their impact on business behavior and consumer welfare. Discuss perfect competition, monopolies, and everything in between.</p>
-        <button onclick="startConversation('market-structures', 'Market Structures')" class="px-4 py-2 bg-indigo-600 text-white font-medium rounded-lg hover:bg-indigo-700 transition-colors inline-block">Start Conversation</button>
+        <span class="subject economics">經濟學</span>
+        <h3>市場結構</h3>
+        <p>探索不同的市場結構及其對企業行為和消費者福利的影響。討論完全競爭、壟斷以及介於兩者之間的各種市場形式。</p>
+        <button onclick="startConversation('market-structures', '市場結構')" class="px-4 py-2 bg-indigo-600 text-white font-medium rounded-lg hover:bg-indigo-700 transition-colors inline-block">開始對話</button>
       </div>
 
       <div class="topic-card">
-        <span class="subject literature">Literature</span>
-        <h3>Shakespeare's Works</h3>
-        <p>Analyze the timeless works of William Shakespeare. Discuss themes, characters, and literary devices in plays like Hamlet, Macbeth, and Romeo and Juliet.</p>
-        <button onclick="startConversation('shakespeares-works', "Shakespeare's Works")" class="px-4 py-2 bg-indigo-600 text-white font-medium rounded-lg hover:bg-indigo-700 transition-colors inline-block">Start Conversation</button>
+        <span class="subject literature">文學</span>
+        <h3>莎士比亞作品</h3>
+        <p>分析威廉·莎士比亞的永恆作品。討論《哈姆雷特》、《麥克白》和《羅密歐與朱麗葉》等戲劇中的主題、人物和文學手法。</p>
+        <button onclick="startConversation('shakespeares-works', '莎士比亞作品')" class="px-4 py-2 bg-indigo-600 text-white font-medium rounded-lg hover:bg-indigo-700 transition-colors inline-block">開始對話</button>
       </div>
     </div>
   </div>
 
   <div class="footer">
     <div>
-      <a href="#">Privacy Policy</a> | <a href="#">Terms of Service</a>
+      <a href="#">隱私政策</a> | <a href="#">服務條款</a>
     </div>
-    <div>© 2025 ChatnLearn. All rights reserved.</div>
+    <div>© 2025 ChatnLearn. 保留所有權利。</div>
   </div>
 </body>
 <script>
   async function startConversation(lessonId, lessonName) {
     // Redirect to not-found page
-    window.location.href = 'not-found.html';
+    window.location.href = 'not-found-zh.html';
   }
 
-  fetch('navbar.html')
+  fetch('navbar-zh.html')
     .then(response => response.text())
     .then(data => {
       document.getElementById('navbar-placeholder').innerHTML = data;
