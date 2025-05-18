@@ -123,9 +123,14 @@
   </div>
 </body>
 <script>
-fetch('navbar.html')
-  .then(response => response.text())
-  .then(data => {
-    document.getElementById('navbar-placeholder').innerHTML = data;
-  });
+  async function startConversation(lessonId, lessonName) {
+    // Redirect to not-found page
+    window.location.href = 'not-found.html';
+  }
+
+  fetch('navbar.html')
+    .then(response => response.text())
+    .then(data => {
+      document.getElementById('navbar-placeholder').innerHTML = data;
+    });
 </script> 
