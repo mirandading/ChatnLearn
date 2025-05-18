@@ -179,22 +179,29 @@
     </div>
   </div>
 
-  <div class="section" id="how-it-works">
-    <h2>觀看演示</h2>
-    <div class="max-w-4xl mx-auto">
-      <div class="relative" style="padding-top: 56.25%;">
-        <video 
-          class="absolute top-0 left-0 w-full h-full rounded-xl shadow-lg"
-          controls
-          poster="video-thumbnail.jpg"
-        >
-          <source src="demo.mp4" type="video/mp4">
-          您的瀏覽器不支持視頻播放。
-        </video>
+  <section class="py-16 bg-gray-50">
+    <div class="container mx-auto px-4">
+      <h2 class="text-3xl font-bold text-center mb-8">了解運作方式</h2>
+      <div class="max-w-4xl mx-auto">
+        <div class="relative" style="padding-top: 56.25%;">
+          <div id="thumbnailContainer" class="absolute inset-0 cursor-pointer">
+            <img id="videoThumbnail" src="thumbnail.png" alt="Video Thumbnail" class="absolute inset-0 w-full h-full object-cover">
+            <div class="absolute inset-0 flex items-center justify-center bg-black bg-opacity-30 hover:bg-opacity-40 transition-all duration-300">
+              <div class="w-20 h-20 bg-white bg-opacity-90 rounded-full flex items-center justify-center transform hover:scale-110 transition-transform duration-300">
+                <svg class="w-12 h-12 text-blue-600" fill="currentColor" viewBox="0 0 24 24">
+                  <path d="M8 5v14l11-7z"/>
+                </svg>
+              </div>
+            </div>
+          </div>
+          <video id="demoVideo" class="absolute inset-0 w-full h-full object-cover" controls preload="auto">
+            <source src="demo.mp4" type="video/mp4">
+            Your browser does not support the video tag.
+          </video>
+        </div>
       </div>
-      <p class="text-center text-gray-600 mt-4">觀看我們的演示，了解 ChatnLearn 如何通過對話幫助您學習</p>
     </div>
-  </div>
+  </section>
 
   <div class="section">
     <h2>ChatnLearn的優勢</h2>
@@ -284,5 +291,29 @@
       .then(data => {
         document.getElementById('navbar-placeholder').innerHTML = data;
       });
+
+    document.addEventListener('DOMContentLoaded', function() {
+      const thumbnailContainer = document.getElementById('thumbnailContainer');
+      const video = document.getElementById('demoVideo');
+      
+      // Initially hide the video
+      video.style.display = 'none';
+      
+      thumbnailContainer.addEventListener('click', function() {
+        // Hide thumbnail container
+        thumbnailContainer.style.display = 'none';
+        // Show and play video
+        video.style.display = 'block';
+        video.play().catch(function(error) {
+          console.log("Video playback failed:", error);
+        });
+      });
+
+      // When video ends, show thumbnail again
+      video.addEventListener('ended', function() {
+        video.style.display = 'none';
+        thumbnailContainer.style.display = 'block';
+      });
+    });
   </script>
 </body> 
