@@ -1,0 +1,749 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ChatnLearn - Talk to Learn. Learn to Talk.</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+        body {
+            font-family: 'Nunito', sans-serif;
+            background-color: #80d1e2;
+        }
+        .gradient-bg {
+            background: linear-gradient(135deg, #4f46e5 0%, #7c3aed 100%);
+        }
+        .card-hover:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.1);
+        }
+        .avatar-animation {
+            animation: float 6s ease-in-out infinite;
+        }
+        @keyframes float {
+            0% { transform: translateY(0px); }
+            50% { transform: translateY(-15px); }
+            100% { transform: translateY(0px); }
+        }
+        .nav-link {
+            position: relative;
+        }
+        .nav-link::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            bottom: -2px;
+            left: 0;
+            background-color: #4f46e5;
+            transition: width 0.3s ease;
+        }
+        .nav-link:hover::after {
+            width: 100%;
+        }
+        .active-nav::after {
+            width: 100%;
+        }
+    </style>
+</head>
+<body>
+    <!-- App Container -->
+    <div id="app" class="min-h-screen flex flex-col">
+        <!-- Navigation -->
+        <nav class="bg-white shadow-sm sticky top-0 z-50">
+            <div class="container mx-auto px-4 py-3 flex justify-between items-center">
+                <a href="#home" class="flex items-center space-x-2" onclick="showPage('home')">
+                    <svg class="w-8 h-8 text-indigo-600" fill="currentColor" viewBox="0 0 20 20">
+                        <path d="M10 12a2 2 0 100-4 2 2 0 000 4z"></path>
+                        <path fill-rule="evenodd" d="M10 0C4.477 0 0 4.477 0 10s4.477 10 10 10 10-4.477 10-10S15.523 0 10 0zm0 18a8 8 0 100-16 8 8 0 000 16z" clip-rule="evenodd"></path>
+                    </svg>
+                    <span class="text-xl font-bold text-gray-800">ChatnLearn</span>
+                </a>
+                <div class="hidden md:flex items-center space-x-6">
+                    <a href="#home" class="nav-link active-nav text-gray-700 hover:text-indigo-600 transition-colors" onclick="showPage('home')">Home</a>
+                    <a href="#start-learning" class="nav-link text-gray-700 hover:text-indigo-600 transition-colors" onclick="showPage('start-learning')">Start Learning</a>
+                    <a href="#user-portal" class="nav-link text-gray-700 hover:text-indigo-600 transition-colors" onclick="showPage('user-portal')">User Portal</a>
+                    <a href="#about" class="nav-link text-gray-700 hover:text-indigo-600 transition-colors" onclick="showPage('about')">About Us</a>
+                    <a href="#" class="nav-link text-gray-700 hover:text-indigo-600 transition-colors">中文</a>
+                </div>
+                <button class="md:hidden focus:outline-none" id="menu-toggle">
+                    <svg class="w-6 h-6 text-gray-700" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
+                    </svg>
+                </button>
+            </div>
+            <!-- Mobile menu -->
+            <div class="md:hidden hidden bg-white pb-4 px-4" id="mobile-menu">
+                <a href="#home" class="block py-2 text-gray-700 hover:text-indigo-600" onclick="showPage('home')">Home</a>
+                <a href="#start-learning" class="block py-2 text-gray-700 hover:text-indigo-600" onclick="showPage('start-learning')">Start Learning</a>
+                <a href="#user-portal" class="block py-2 text-gray-700 hover:text-indigo-600" onclick="showPage('user-portal')">User Portal</a>
+                <a href="#about" class="block py-2 text-gray-700 hover:text-indigo-600" onclick="showPage('about')">About Us</a>
+                <a href="#" class="block py-2 text-gray-700 hover:text-indigo-600">中文</a>
+            </div>
+        </nav>
+
+        <!-- Main Content Area -->
+        <main class="flex-grow">
+            <!-- Home Page -->
+            <div id="home" class="page active">
+                <!-- Hero Section -->
+                <section class="gradient-bg text-white py-16 md:py-24">
+                    <div class="container mx-auto px-4">
+                        <div class="flex flex-col md:flex-row items-center justify-between">
+                            <div class="md:w-1/2 mb-10 md:mb-0">
+                                <h1 class="text-4xl md:text-5xl font-bold mb-4 leading-tight">Talk to Learn.<br>Learn to Talk.</h1>
+                                <p class="text-xl mb-8 text-indigo-100">AI-powered conversations to boost confidence, fluency, and critical thinking.</p>
+                                <div class="flex flex-col sm:flex-row space-y-4 sm:space-y-0 sm:space-x-4">
+                                    <button onclick="showPage('topic-prep')" class="px-6 py-3 bg-white text-indigo-600 font-medium rounded-lg hover:bg-indigo-50 transition-colors shadow-md">Try a Demo Session</button>
+                                    <button class="px-6 py-3 border-2 border-white text-white font-medium rounded-lg hover:bg-white hover:bg-opacity-10 transition-colors">See How It Works</button>
+                                </div>
+                            </div>
+                            <div class="md:w-1/2 flex justify-center">
+                                <div class="avatar-animation">
+                                    <svg class="w-64 h-64 md:w-80 md:h-80" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
+                                        <circle cx="100" cy="100" r="80" fill="#c7d2fe" />
+                                        <circle cx="80" cy="85" r="10" fill="#312e81" />
+                                        <circle cx="120" cy="85" r="10" fill="#312e81" />
+                                        <path d="M70,115 Q100,135 130,115" stroke="#312e81" stroke-width="5" fill="none" />
+                                        <path d="M60,60 Q70,40 100,40 Q130,40 140,60" stroke="#312e81" stroke-width="5" fill="none" />
+                                        <circle cx="100" cy="90" r="50" fill="none" stroke="#312e81" stroke-width="2" stroke-dasharray="5,5" />
+                                        <g class="speech-bubble">
+                                            <path d="M140,70 Q160,65 155,85 Q150,100 140,95" fill="#ffffff" />
+                                            <text x="145" y="85" font-size="12" fill="#4f46e5">Hi!</text>
+                                        </g>
+                                    </svg>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Intro Section -->
+                <section class="py-16 bg-white">
+                    <div class="container mx-auto px-4">
+                        <div class="max-w-3xl mx-auto text-center">
+                            <h2 class="text-3xl font-bold mb-6 text-gray-800">What is ChatnLearn?</h2>
+                            <p class="text-lg text-gray-600 mb-8">ChatnLearn is an innovative educational platform that uses AI-powered conversations to help students develop both subject knowledge and communication skills. Our interactive approach creates a safe space for learners to practice speaking, receive instant feedback, and build confidence through meaningful dialogue.</p>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Mode Cards Section -->
+                <section class="py-16 bg-gray-50">
+                    <div class="container mx-auto px-4">
+                        <h2 class="text-3xl font-bold mb-12 text-center text-gray-800">Choose Your Learning Mode</h2>
+                        <div class="flex flex-col md:flex-row space-y-8 md:space-y-0 md:space-x-8 max-w-5xl mx-auto">
+                            <!-- Card 1 -->
+                            <div class="bg-white rounded-xl shadow-lg overflow-hidden flex-1 transition-all duration-300 card-hover">
+                                <div class="p-8">
+                                    <div class="w-16 h-16 bg-indigo-100 rounded-full flex items-center justify-center mb-6">
+                                        <svg class="w-8 h-8 text-indigo-600" fill="currentColor" viewBox="0 0 20 20">
+                                            <path d="M10.394 2.08a1 1 0 00-.788 0l-7 3a1 1 0 000 1.84L5.25 8.051a.999.999 0 01.356-.257l4-1.714a1 1 0 11.788 1.838l-2.727 1.17 1.94.831a1 1 0 00.787 0l7-3a1 1 0 000-1.838l-7-3zM3.31 9.397L5 10.12v4.102a8.969 8.969 0 00-1.05-.174 1 1 0 01-.89-.89 11.115 11.115 0 01.25-3.762zM9.3 16.573A9.026 9.026 0 007 14.935v-3.957l1.818.78a3 3 0 002.364 0l5.508-2.361a11.026 11.026 0 01.25 3.762 1 1 0 01-.89.89 8.968 8.968 0 00-5.35 2.524 1 1 0 01-1.4 0zM6 18a1 1 0 001-1v-2.065a8.935 8.935 0 00-2-.712V17a1 1 0 001 1z"></path>
+                                        </svg>
+                                    </div>
+                                    <h3 class="text-2xl font-bold mb-3 text-gray-800">Talk to Learn</h3>
+                                    <p class="text-gray-600 mb-6">Engage in subject-specific conversations to deepen your understanding of academic topics through dialogue and questioning.</p>
+                                    <button onclick="showPage('talk-to-learn')" class="px-6 py-2 bg-indigo-600 text-white font-medium rounded-lg hover:bg-indigo-700 transition-colors">Explore Subjects</button>
+                                </div>
+                            </div>
+                            
+                            <!-- Card 2 -->
+                            <div class="bg-white rounded-xl shadow-lg overflow-hidden flex-1 transition-all duration-300 card-hover">
+                                <div class="p-8">
+                                    <div class="w-16 h-16 bg-purple-100 rounded-full flex items-center justify-center mb-6">
+                                        <svg class="w-8 h-8 text-purple-600" fill="currentColor" viewBox="0 0 20 20">
+                                            <path fill-rule="evenodd" d="M18 5v8a2 2 0 01-2 2h-5l-5 4v-4H4a2 2 0 01-2-2V5a2 2 0 012-2h12a2 2 0 012 2zM7 8H5v2h2V8zm2 0h2v2H9V8zm6 0h-2v2h2V8z" clip-rule="evenodd"></path>
+                                        </svg>
+                                    </div>
+                                    <h3 class="text-2xl font-bold mb-3 text-gray-800">Learn to Talk</h3>
+                                    <p class="text-gray-600 mb-6">Practice language skills in a supportive environment with conversations designed to improve fluency and confidence.</p>
+                                    <button onclick="showPage('learn-to-talk')" class="px-6 py-2 bg-purple-600 text-white font-medium rounded-lg hover:bg-purple-700 transition-colors">Explore Languages</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Benefits Section -->
+                <section class="py-16 bg-white">
+                    <div class="container mx-auto px-4">
+                        <h2 class="text-3xl font-bold mb-12 text-center text-gray-800">Benefits of ChatnLearn</h2>
+                        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 max-w-6xl mx-auto">
+                            <!-- Benefit 1 -->
+                            <div class="text-center">
+                                <div class="w-16 h-16 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-4">
+                                    <svg class="w-8 h-8 text-green-600" fill="currentColor" viewBox="0 0 20 20">
+                                        <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path>
+                                    </svg>
+                                </div>
+                                <h3 class="text-xl font-semibold mb-2 text-gray-800">Personalized Feedback</h3>
+                                <p class="text-gray-600">Receive instant, tailored feedback on your communication and understanding.</p>
+                            </div>
+                            
+                            <!-- Benefit 2 -->
+                            <div class="text-center">
+                                <div class="w-16 h-16 bg-blue-100 rounded-full flex items-center justify-center mx-auto mb-4">
+                                    <svg class="w-8 h-8 text-blue-600" fill="currentColor" viewBox="0 0 20 20">
+                                        <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm1-11a1 1 0 10-2 0v2H7a1 1 0 100 2h2v2a1 1 0 102 0v-2h2a1 1 0 100-2h-2V7z" clip-rule="evenodd"></path>
+                                    </svg>
+                                </div>
+                                <h3 class="text-xl font-semibold mb-2 text-gray-800">Build Confidence</h3>
+                                <p class="text-gray-600">Practice in a judgment-free environment to develop speaking confidence.</p>
+                            </div>
+                            
+                            <!-- Benefit 3 -->
+                            <div class="text-center">
+                                <div class="w-16 h-16 bg-yellow-100 rounded-full flex items-center justify-center mx-auto mb-4">
+                                    <svg class="w-8 h-8 text-yellow-600" fill="currentColor" viewBox="0 0 20 20">
+                                        <path d="M13 6a3 3 0 11-6 0 3 3 0 016 0zM18 8a2 2 0 11-4 0 2 2 0 014 0zM14 15a4 4 0 00-8 0v3h8v-3zM6 8a2 2 0 11-4 0 2 2 0 014 0zM16 18v-3a5.972 5.972 0 00-.75-2.906A3.005 3.005 0 0119 15v3h-3zM4.75 12.094A5.973 5.973 0 004 15v3H1v-3a3 3 0 013.75-2.906z"></path>
+                                    </svg>
+                                </div>
+                                <h3 class="text-xl font-semibold mb-2 text-gray-800">Teacher Support</h3>
+                                <p class="text-gray-600">Supplements classroom learning with additional practice opportunities.</p>
+                            </div>
+                            
+                            <!-- Benefit 4 -->
+                            <div class="text-center">
+                                <div class="w-16 h-16 bg-red-100 rounded-full flex items-center justify-center mx-auto mb-4">
+                                    <svg class="w-8 h-8 text-red-600" fill="currentColor" viewBox="0 0 20 20">
+                                        <path fill-rule="evenodd" d="M12.316 3.051a1 1 0 01.633 1.265l-4 12a1 1 0 11-1.898-.632l4-12a1 1 0 011.265-.633zM5.707 6.293a1 1 0 010 1.414L3.414 10l2.293 2.293a1 1 0 11-1.414 1.414l-3-3a1 1 0 010-1.414l3-3a1 1 0 011.414 0zm8.586 0a1 1 0 011.414 0l3 3a1 1 0 010 1.414l-3 3a1 1 0 11-1.414-1.414L16.586 10l-2.293-2.293a1 1 0 010-1.414z" clip-rule="evenodd"></path>
+                                    </svg>
+                                </div>
+                                <h3 class="text-xl font-semibold mb-2 text-gray-800">Safe Practice</h3>
+                                <p class="text-gray-600">Make mistakes and learn from them without fear of judgment.</p>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Pedagogy Section -->
+                <section class="py-16 bg-indigo-50">
+                    <div class="container mx-auto px-4">
+                        <div class="flex flex-col md:flex-row items-center max-w-5xl mx-auto">
+                            <div class="md:w-1/2 mb-8 md:mb-0 md:pr-8">
+                                <h2 class="text-3xl font-bold mb-6 text-gray-800">Why Oracy Matters</h2>
+                                <p class="text-lg text-gray-600 mb-4">Oracy—the ability to express oneself fluently and grammatically in speech—is a fundamental skill that's often overlooked in traditional education.</p>
+                                <p class="text-lg text-gray-600">Research shows that students who regularly engage in structured dialogue show improved critical thinking, deeper subject understanding, and greater confidence in academic settings.</p>
+                            </div>
+                            <div class="md:w-1/2">
+                                <svg class="w-full max-w-md mx-auto" viewBox="0 0 400 300" xmlns="http://www.w3.org/2000/svg">
+                                    <circle cx="200" cy="150" r="100" fill="#c7d2fe" opacity="0.6" />
+                                    <path d="M150,180 Q200,220 250,180" stroke="#4f46e5" stroke-width="5" fill="none" />
+                                    <circle cx="150" cy="120" r="20" fill="#4f46e5" opacity="0.7" />
+                                    <circle cx="250" cy="120" r="20" fill="#4f46e5" opacity="0.7" />
+                                    <path d="M130,80 Q200,40 270,80" stroke="#4f46e5" stroke-width="5" fill="none" />
+                                    <g>
+                                        <path d="M100,100 Q80,70 100,50 Q120,30 150,50 Q130,80 100,100 Z" fill="#6366f1" />
+                                        <text x="110" y="70" font-size="12" fill="white">Think</text>
+                                    </g>
+                                    <g>
+                                        <path d="M300,100 Q320,70 300,50 Q280,30 250,50 Q270,80 300,100 Z" fill="#6366f1" />
+                                        <text x="265" y="70" font-size="12" fill="white">Speak</text>
+                                    </g>
+                                    <g>
+                                        <path d="M200,230 Q220,260 200,280 Q180,300 150,280 Q170,250 200,230 Z" fill="#6366f1" />
+                                        <text x="165" y="270" font-size="12" fill="white">Learn</text>
+                                    </g>
+                                </svg>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Contact Section -->
+                <section class="py-16 bg-white">
+                    <div class="container mx-auto px-4">
+                        <div class="max-w-3xl mx-auto">
+                            <h2 class="text-3xl font-bold mb-8 text-center text-gray-800">Get in Touch</h2>
+                            <div class="bg-gray-50 rounded-xl p-8 shadow-sm">
+                                <form class="space-y-6">
+                                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                                        <div>
+                                            <label for="name" class="block text-sm font-medium text-gray-700 mb-1">Name</label>
+                                            <input type="text" id="name" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500">
+                                        </div>
+                                        <div>
+                                            <label for="email" class="block text-sm font-medium text-gray-700 mb-1">Email</label>
+                                            <input type="email" id="email" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500">
+                                        </div>
+                                    </div>
+                                    <div>
+                                        <label for="subject" class="block text-sm font-medium text-gray-700 mb-1">Subject</label>
+                                        <input type="text" id="subject" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500">
+                                    </div>
+                                    <div>
+                                        <label for="message" class="block text-sm font-medium text-gray-700 mb-1">Message</label>
+                                        <textarea id="message" rows="4" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500"></textarea>
+                                    </div>
+                                    <div class="text-center">
+                                        <button type="button" class="px-6 py-3 bg-indigo-600 text-white font-medium rounded-lg hover:bg-indigo-700 transition-colors">
+                                            Send Message
+                                        </button>
+                                    </div>
+                                    <div class="text-center text-sm text-gray-500">
+                                        This is a demo form. In a real implementation, this would send your message to our team.
+                                    </div>
+                                </form>
+                                <div class="mt-8 flex justify-center space-x-6">
+                                    <a href="#" class="text-gray-500 hover:text-indigo-600">
+                                        <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24">
+                                            <path d="M22.675 0h-21.35c-.732 0-1.325.593-1.325 1.325v21.351c0 .731.593 1.324 1.325 1.324h11.495v-9.294h-3.128v-3.622h3.128v-2.671c0-3.1 1.893-4.788 4.659-4.788 1.325 0 2.463.099 2.795.143v3.24l-1.918.001c-1.504 0-1.795.715-1.795 1.763v2.313h3.587l-.467 3.622h-3.12v9.293h6.116c.73 0 1.323-.593 1.323-1.325v-21.35c0-.732-.593-1.325-1.325-1.325z"/>
+                                        </svg>
+                                    </a>
+                                    <a href="#" class="text-gray-500 hover:text-indigo-600">
+                                        <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24">
+                                            <path d="M23.953 4.57a10 10 0 01-2.825.775 4.958 4.958 0 002.163-2.723 10.054 10.054 0 01-3.127 1.195 4.92 4.92 0 00-8.384 4.482C7.69 8.095 4.067 6.13 1.64 3.162a4.822 4.822 0 00-.666 2.475c0 1.71.87 3.213 2.188 4.096a4.904 4.904 0 01-2.228-.616v.06a4.923 4.923 0 003.946 4.827 4.996 4.996 0 01-2.212.085 4.936 4.936 0 004.604 3.417 9.867 9.867 0 01-6.102 2.105c-.39 0-.779-.023-1.17-.067a13.995 13.995 0 007.557 2.209c9.053 0 13.998-7.496 13.998-13.985 0-.21 0-.42-.015-.63A9.935 9.935 0 0024 4.59z"/>
+                                        </svg>
+                                    </a>
+                                    <a href="#" class="text-gray-500 hover:text-indigo-600">
+                                        <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24">
+                                            <path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/>
+                                        </svg>
+                                    </a>
+                                    <a href="#" class="text-gray-500 hover:text-indigo-600">
+                                        <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24">
+                                            <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/>
+                                        </svg>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+            </div>
+
+            <!-- Start Learning Page -->
+            <div id="start-learning" class="page hidden py-16">
+                <div class="container mx-auto px-4">
+                    <h1 class="text-3xl font-bold mb-12 text-center text-gray-800">Choose Your Learning Path</h1>
+                    <div class="flex flex-col md:flex-row space-y-8 md:space-y-0 md:space-x-8 max-w-5xl mx-auto">
+                        <!-- Card 1 -->
+                        <div class="bg-white rounded-xl shadow-lg overflow-hidden flex-1 transition-all duration-300 card-hover">
+                            <div class="p-8">
+                                <div class="w-16 h-16 bg-indigo-100 rounded-full flex items-center justify-center mb-6">
+                                    <svg class="w-8 h-8 text-indigo-600" fill="currentColor" viewBox="0 0 20 20">
+                                        <path d="M10.394 2.08a1 1 0 00-.788 0l-7 3a1 1 0 000 1.84L5.25 8.051a.999.999 0 01.356-.257l4-1.714a1 1 0 11.788 1.838l-2.727 1.17 1.94.831a1 1 0 00.787 0l7-3a1 1 0 000-1.838l-7-3zM3.31 9.397L5 10.12v4.102a8.969 8.969 0 00-1.05-.174 1 1 0 01-.89-.89 11.115 11.115 0 01.25-3.762zM9.3 16.573A9.026 9.026 0 007 14.935v-3.957l1.818.78a3 3 0 002.364 0l5.508-2.361a11.026 11.026 0 01.25 3.762 1 1 0 01-.89.89 8.968 8.968 0 00-5.35 2.524 1 1 0 01-1.4 0zM6 18a1 1 0 001-1v-2.065a8.935 8.935 0 00-2-.712V17a1 1 0 001 1z"></path>
+                                    </svg>
+                                </div>
+                                <h3 class="text-2xl font-bold mb-3 text-gray-800">Talk to Learn</h3>
+                                <p class="text-gray-600 mb-6">Engage in subject-specific conversations to deepen your understanding of academic topics through dialogue and questioning.</p>
+                                <button onclick="showPage('talk-to-learn')" class="px-6 py-2 bg-indigo-600 text-white font-medium rounded-lg hover:bg-indigo-700 transition-colors">Explore Subjects</button>
+                            </div>
+                        </div>
+                        
+                        <!-- Card 2 -->
+                        <div class="bg-white rounded-xl shadow-lg overflow-hidden flex-1 transition-all duration-300 card-hover">
+                            <div class="p-8">
+                                <div class="w-16 h-16 bg-purple-100 rounded-full flex items-center justify-center mb-6">
+                                    <svg class="w-8 h-8 text-purple-600" fill="currentColor" viewBox="0 0 20 20">
+                                        <path fill-rule="evenodd" d="M18 5v8a2 2 0 01-2 2h-5l-5 4v-4H4a2 2 0 01-2-2V5a2 2 0 012-2h12a2 2 0 012 2zM7 8H5v2h2V8zm2 0h2v2H9V8zm6 0h-2v2h2V8z" clip-rule="evenodd"></path>
+                                    </svg>
+                                </div>
+                                <h3 class="text-2xl font-bold mb-3 text-gray-800">Learn to Talk</h3>
+                                <p class="text-gray-600 mb-6">Practice language skills in a supportive environment with conversations designed to improve fluency and confidence.</p>
+                                <button onclick="showPage('learn-to-talk')" class="px-6 py-2 bg-purple-600 text-white font-medium rounded-lg hover:bg-purple-700 transition-colors">Explore Languages</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Talk to Learn Page -->
+            <div id="talk-to-learn" class="page hidden py-16">
+                <div class="container mx-auto px-4">
+                    <h1 class="text-3xl font-bold mb-4 text-center text-gray-800">Talk to Learn: Subject Learning</h1>
+                    <p class="text-lg text-center text-gray-600 mb-12 max-w-3xl mx-auto">Choose a subject to start a conversation that will deepen your understanding through dialogue and questioning.</p>
+                    
+                    <div class="flex flex-col md:flex-row mb-8">
+                        <div class="md:w-1/4 mb-4 md:mb-0">
+                            <div class="bg-white rounded-lg shadow p-4">
+                                <h3 class="font-semibold text-lg mb-3 text-gray-800">Filter by</h3>
+                                <div class="space-y-4">
+                                    <div>
+                                        <h4 class="font-medium text-gray-700 mb-2">Subject Area</h4>
+                                        <div class="space-y-2">
+                                            <label class="flex items-center">
+                                                <input type="checkbox" class="form-checkbox h-4 w-4 text-indigo-600" checked>
+                                                <span class="ml-2 text-gray-700">Science</span>
+                                            </label>
+                                            <label class="flex items-center">
+                                                <input type="checkbox" class="form-checkbox h-4 w-4 text-indigo-600" checked>
+                                                <span class="ml-2 text-gray-700">Mathematics</span>
+                                            </label>
+                                            <label class="flex items-center">
+                                                <input type="checkbox" class="form-checkbox h-4 w-4 text-indigo-600" checked>
+                                                <span class="ml-2 text-gray-700">Humanities</span>
+                                            </label>
+                                            <label class="flex items-center">
+                                                <input type="checkbox" class="form-checkbox h-4 w-4 text-indigo-600" checked>
+                                                <span class="ml-2 text-gray-700">Arts</span>
+                                            </label>
+                                        </div>
+                                    </div>
+                                    <div>
+                                        <h4 class="font-medium text-gray-700 mb-2">Level</h4>
+                                        <div class="space-y-2">
+                                            <label class="flex items-center">
+                                                <input type="checkbox" class="form-checkbox h-4 w-4 text-indigo-600" checked>
+                                                <span class="ml-2 text-gray-700">Beginner</span>
+                                            </label>
+                                            <label class="flex items-center">
+                                                <input type="checkbox" class="form-checkbox h-4 w-4 text-indigo-600" checked>
+                                                <span class="ml-2 text-gray-700">Intermediate</span>
+                                            </label>
+                                            <label class="flex items-center">
+                                                <input type="checkbox" class="form-checkbox h-4 w-4 text-indigo-600" checked>
+                                                <span class="ml-2 text-gray-700">Advanced</span>
+                                            </label>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="md:w-3/4 md:pl-6">
+                            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                                <!-- Subject Card 1 -->
+                                <div class="bg-white rounded-lg shadow overflow-hidden transition-all duration-300 hover:shadow-lg">
+                                    <div class="h-32 bg-gradient-to-r from-blue-500 to-blue-700 flex items-center justify-center">
+                                        <svg class="w-16 h-16 text-white" fill="currentColor" viewBox="0 0 20 20">
+                                            <path d="M10 12a2 2 0 100-4 2 2 0 000 4z"></path>
+                                            <path fill-rule="evenodd" d="M.458 10C1.732 5.943 5.522 3 10 3s8.268 2.943 9.542 7c-1.274 4.057-5.064 7-9.542 7S1.732 14.057.458 10zM14 10a4 4 0 11-8 0 4 4 0 018 0z" clip-rule="evenodd"></path>
+                                        </svg>
+                                    </div>
+                                    <div class="p-4">
+                                        <h3 class="font-bold text-lg mb-2 text-gray-800">Physics: Forces & Motion</h3>
+                                        <p class="text-gray-600 text-sm mb-4">Explore Newton's laws, momentum, and energy through conversation.</p>
+                                        <div class="flex items-center text-sm text-gray-500 mb-4">
+                                            <svg class="w-4 h-4 mr-1" fill="currentColor" viewBox="0 0 20 20">
+                                                <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm1-12a1 1 0 10-2 0v4a1 1 0 00.293.707l2.828 2.829a1 1 0 101.415-1.415L11 9.586V6z" clip-rule="evenodd"></path>
+                                            </svg>
+                                            <span>15-20 minutes</span>
+                                        </div>
+                                        <button onclick="showPage('topic-prep')" class="w-full px-4 py-2 bg-blue-600 text-white font-medium rounded hover:bg-blue-700 transition-colors">Start</button>
+                                    </div>
+                                </div>
+                                
+                                <!-- Subject Card 2 -->
+                                <div class="bg-white rounded-lg shadow overflow-hidden transition-all duration-300 hover:shadow-lg">
+                                    <div class="h-32 bg-gradient-to-r from-green-500 to-green-700 flex items-center justify-center">
+                                        <svg class="w-16 h-16 text-white" fill="currentColor" viewBox="0 0 20 20">
+                                            <path fill-rule="evenodd" d="M4 4a2 2 0 012-2h4.586A2 2 0 0112 2.586L15.414 6A2 2 0 0116 7.414V16a2 2 0 01-2 2H6a2 2 0 01-2-2V4zm2 6a1 1 0 011-1h6a1 1 0 110 2H7a1 1 0 01-1-1zm1 3a1 1 0 100 2h6a1 1 0 100-2H7z" clip-rule="evenodd"></path>
+                                        </svg>
+                                    </div>
+                                    <div class="p-4">
+                                        <h3 class="font-bold text-lg mb-2 text-gray-800">Biology: Ecosystems</h3>
+                                        <p class="text-gray-600 text-sm mb-4">Discuss biodiversity, food webs, and environmental impacts.</p>
+                                        <div class="flex items-center text-sm text-gray-500 mb-4">
+                                            <svg class="w-4 h-4 mr-1" fill="currentColor" viewBox="0 0 20 20">
+                                                <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm1-12a1 1 0 10-2 0v4a1 1 0 00.293.707l2.828 2.829a1 1 0 101.415-1.415L11 9.586V6z" clip-rule="evenodd"></path>
+                                            </svg>
+                                            <span>15-20 minutes</span>
+                                        </div>
+                                        <button onclick="showPage('topic-prep')" class="w-full px-4 py-2 bg-green-600 text-white font-medium rounded hover:bg-green-700 transition-colors">Start</button>
+                                    </div>
+                                </div>
+                                
+                                <!-- Subject Card 3 -->
+                                <div class="bg-white rounded-lg shadow overflow-hidden transition-all duration-300 hover:shadow-lg">
+                                    <div class="h-32 bg-gradient-to-r from-purple-500 to-purple-700 flex items-center justify-center">
+                                        <svg class="w-16 h-16 text-white" fill="currentColor" viewBox="0 0 20 20">
+                                            <path d="M9 4.804A7.968 7.968 0 005.5 4c-1.255 0-2.443.29-3.5.804v10A7.969 7.969 0 015.5 14c1.669 0 3.218.51 4.5 1.385A7.962 7.962 0 0114.5 14c1.255 0 2.443.29 3.5.804v-10A7.968 7.968 0 0014.5 4c-1.255 0-2.443.29-3.5.804V12a1 1 0 11-2 0V4.804z"></path>
+                                        </svg>
+                                    </div>
+                                    <div class="p-4">
+                                        <h3 class="font-bold text-lg mb-2 text-gray-800">History: World War II</h3>
+                                        <p class="text-gray-600 text-sm mb-4">Analyze causes, key events, and global impacts of WWII.</p>
+                                        <div class="flex items-center text-sm text-gray-500 mb-4">
+                                            <svg class="w-4 h-4 mr-1" fill="currentColor" viewBox="0 0 20 20">
+                                                <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm1-12a1 1 0 10-2 0v4a1 1 0 00.293.707l2.828 2.829a1 1 0 101.415-1.415L11 9.586V6z" clip-rule="evenodd"></path>
+                                            </svg>
+                                            <span>15-20 minutes</span>
+                                        </div>
+                                        <button onclick="showPage('topic-prep')" class="w-full px-4 py-2 bg-purple-600 text-white font-medium rounded hover:bg-purple-700 transition-colors">Start</button>
+                                    </div>
+                                </div>
+                                
+                                <!-- Subject Card 4 -->
+                                <div class="bg-white rounded-lg shadow overflow-hidden transition-all duration-300 hover:shadow-lg">
+                                    <div class="h-32 bg-gradient-to-r from-red-500 to-red-700 flex items-center justify-center">
+                                        <svg class="w-16 h-16 text-white" fill="currentColor" viewBox="0 0 20 20">
+                                            <path fill-rule="evenodd" d="M10 2a1 1 0 011 1v1.323l3.954 1.582 1.599-.8a1 1 0 01.894 1.79l-1.233.616 1.738 5.42a1 1 0 01-.285 1.05A3.989 3.989 0 0115 15a3.989 3.989 0 01-2.667-1.019 1 1 0 01-.285-1.05l1.715-5.349L11 6.477V16h2a1 1 0 110 2H7a1 1 0 110-2h2V6.477L6.237 7.582l1.715 5.349a1 1 0 01-.285 1.05A3.989 3.989 0 015 15a3.989 3.989 0 01-2.667-1.019 1 1 0 01-.285-1.05l1.738-5.42-1.233-.617a1 1 0 01.894-1.788l1.599.799L9 4.323V3a1 1 0 011-1z" clip-rule="evenodd"></path>
+                                        </svg>
+                                    </div>
+                                    <div class="p-4">
+                                        <h3 class="font-bold text-lg mb-2 text-gray-800">Mathematics: Algebra</h3>
+                                        <p class="text-gray-600 text-sm mb-4">Explore equations, functions, and problem-solving strategies.</p>
+                                        <div class="flex items-center text-sm text-gray-500 mb-4">
+                                            <svg class="w-4 h-4 mr-1" fill="currentColor" viewBox="0 0 20 20">
+                                                <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm1-12a1 1 0 10-2 0v4a1 1 0 00.293.707l2.828 2.829a1 1 0 101.415-1.415L11 9.586V6z" clip-rule="evenodd"></path>
+                                            </svg>
+                                            <span>15-20 minutes</span>
+                                        </div>
+                                        <button onclick="showPage('topic-prep')" class="w-full px-4 py-2 bg-red-600 text-white font-medium rounded hover:bg-red-700 transition-colors">Start</button>
+                                    </div>
+                                </div>
+                                
+                                <!-- Subject Card 5 -->
+                                <div class="bg-white rounded-lg shadow overflow-hidden transition-all duration-300 hover:shadow-lg">
+                                    <div class="h-32 bg-gradient-to-r from-yellow-500 to-yellow-700 flex items-center justify-center">
+                                        <svg class="w-16 h-16 text-white" fill="currentColor" viewBox="0 0 20 20">
+                                            <path fill-rule="evenodd" d="M7 2a1 1 0 00-.707 1.707L7 4.414v3.758a1 1 0 01-.293.707l-4 4C.817 14.769 2.354 18 4.828 18h10.343c2.474 0 4.011-3.231 2.122-5.121l-4-4A1 1 0 0113 8.172V4.414l.707-.707A1 1 0 0013 2H7zm2 6.172V4h2v4.172a3 3 0 00.879 2.12l1.027 1.028a4 4 0 00-2.171.102l-.47.156a4 4 0 01-2.53 0l-.563-.187a1.993 1.993 0 00-.114-.035l1.063-1.063A3 3 0 009 8.172z" clip-rule="evenodd"></path>
+                                        </svg>
+                                    </div>
+                                    <div class="p-4">
+                                        <h3 class="font-bold text-lg mb-2 text-gray-800">Chemistry: Periodic Table</h3>
+                                        <p class="text-gray-600 text-sm mb-4">Discuss elements, properties, and chemical reactions.</p>
+                                        <div class="flex items-center text-sm text-gray-500 mb-4">
+                                            <svg class="w-4 h-4 mr-1" fill="currentColor" viewBox="0 0 20 20">
+                                                <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm1-12a1 1 0 10-2 0v4a1 1 0 00.293.707l2.828 2.829a1 1 0 101.415-1.415L11 9.586V6z" clip-rule="evenodd"></path>
+                                            </svg>
+                                            <span>15-20 minutes</span>
+                                        </div>
+                                        <button onclick="showPage('topic-prep')" class="w-full px-4 py-2 bg-yellow-600 text-white font-medium rounded hover:bg-yellow-700 transition-colors">Start</button>
+                                    </div>
+                                </div>
+                                
+                                <!-- Subject Card 6 -->
+                                <div class="bg-white rounded-lg shadow overflow-hidden transition-all duration-300 hover:shadow-lg">
+                                    <div class="h-32 bg-gradient-to-r from-pink-500 to-pink-700 flex items-center justify-center">
+                                        <svg class="w-16 h-16 text-white" fill="currentColor" viewBox="0 0 20 20">
+                                            <path fill-rule="evenodd" d="M3 5a2 2 0 012-2h10a2 2 0 012 2v8a2 2 0 01-2 2h-2.22l.123.489.804.804A1 1 0 0113 18H7a1 1 0 01-.707-1.707l.804-.804L7.22 15H5a2 2 0 01-2-2V5zm5.771 7H5V5h10v7H8.771z" clip-rule="evenodd"></path>
+                                        </svg>
+                                    </div>
+                                    <div class="p-4">
+                                        <h3 class="font-bold text-lg mb-2 text-gray-800">Literature: Shakespeare</h3>
+                                        <p class="text-gray-600 text-sm mb-4">Analyze themes, characters, and language in Shakespeare's works.</p>
+                                        <div class="flex items-center text-sm text-gray-500 mb-4">
+                                            <svg class="w-4 h-4 mr-1" fill="currentColor" viewBox="0 0 20 20">
+                                                <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm1-12a1 1 0 10-2 0v4a1 1 0 00.293.707l2.828 2.829a1 1 0 101.415-1.415L11 9.586V6z" clip-rule="evenodd"></path>
+                                            </svg>
+                                            <span>15-20 minutes</span>
+                                        </div>
+                                        <button onclick="showPage('topic-prep')" class="w-full px-4 py-2 bg-pink-600 text-white font-medium rounded hover:bg-pink-700 transition-colors">Start</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Learn to Talk Page -->
+            <div id="learn-to-talk" class="page hidden py-16">
+                <div class="container mx-auto px-4">
+                    <h1 class="text-3xl font-bold mb-4 text-center text-gray-800">Learn to Talk: Language Practice</h1>
+                    <p class="text-lg text-center text-gray-600 mb-12 max-w-3xl mx-auto">Choose a language topic to practice your speaking skills in a supportive environment.</p>
+                    
+                    <div class="flex flex-col md:flex-row mb-8">
+                        <div class="md:w-1/4 mb-4 md:mb-0">
+                            <div class="bg-white rounded-lg shadow p-4">
+                                <h3 class="font-semibold text-lg mb-3 text-gray-800">Filter by</h3>
+                                <div class="space-y-4">
+                                    <div>
+                                        <h4 class="font-medium text-gray-700 mb-2">Language</h4>
+                                        <div class="space-y-2">
+                                            <label class="flex items-center">
+                                                <input type="checkbox" class="form-checkbox h-4 w-4 text-purple-600" checked>
+                                                <span class="ml-2 text-gray-700">English</span>
+                                            </label>
+                                            <label class="flex items-center">
+                                                <input type="checkbox" class="form-checkbox h-4 w-4 text-purple-600" checked>
+                                                <span class="ml-2 text-gray-700">Spanish</span>
+                                            </label>
+                                            <label class="flex items-center">
+                                                <input type="checkbox" class="form-checkbox h-4 w-4 text-purple-600" checked>
+                                                <span class="ml-2 text-gray-700">French</span>
+                                            </label>
+                                            <label class="flex items-center">
+                                                <input type="checkbox" class="form-checkbox h-4 w-4 text-purple-600" checked>
+                                                <span class="ml-2 text-gray-700">Mandarin</span>
+                                            </label>
+                                        </div>
+                                    </div>
+                                    <div>
+                                        <h4 class="font-medium text-gray-700 mb-2">Level</h4>
+                                        <div class="space-y-2">
+                                            <label class="flex items-center">
+                                                <input type="checkbox" class="form-checkbox h-4 w-4 text-purple-600" checked>
+                                                <span class="ml-2 text-gray-700">Beginner</span>
+                                            </label>
+                                            <label class="flex items-center">
+                                                <input type="checkbox" class="form-checkbox h-4 w-4 text-purple-600" checked>
+                                                <span class="ml-2 text-gray-700">Intermediate</span>
+                                            </label>
+                                            <label class="flex items-center">
+                                                <input type="checkbox" class="form-checkbox h-4 w-4 text-purple-600" checked>
+                                                <span class="ml-2 text-gray-700">Advanced</span>
+                                            </label>
+                                        </div>
+                                    </div>
+                                    <div>
+                                        <h4 class="font-medium text-gray-700 mb-2">Topic Type</h4>
+                                        <div class="space-y-2">
+                                            <label class="flex items-center">
+                                                <input type="checkbox" class="form-checkbox h-4 w-4 text-purple-600" checked>
+                                                <span class="ml-2 text-gray-700">Everyday Conversation</span>
+                                            </label>
+                                            <label class="flex items-center">
+                                                <input type="checkbox" class="form-checkbox h-4 w-4 text-purple-600" checked>
+                                                <span class="ml-2 text-gray-700">Business</span>
+                                            </label>
+                                            <label class="flex items-center">
+                                                <input type="checkbox" class="form-checkbox h-4 w-4 text-purple-600" checked>
+                                                <span class="ml-2 text-gray-700">Travel</span>
+                                            </label>
+                                            <label class="flex items-center">
+                                                <input type="checkbox" class="form-checkbox h-4 w-4 text-purple-600" checked>
+                                                <span class="ml-2 text-gray-700">Academic</span>
+                                            </label>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="md:w-3/4 md:pl-6">
+                            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                                <!-- Language Card 1 -->
+                                <div class="bg-white rounded-lg shadow overflow-hidden transition-all duration-300 hover:shadow-lg">
+                                    <div class="h-32 bg-gradient-to-r from-purple-500 to-indigo-600 flex items-center justify-center">
+                                        <div class="text-white text-4xl font-bold">🇬🇧</div>
+                                    </div>
+                                    <div class="p-4">
+                                        <div class="flex justify-between items-center mb-2">
+                                            <h3 class="font-bold text-lg text-gray-800">English: Ordering Food</h3>
+                                            <span class="bg-green-100 text-green-800 text-xs px-2 py-1 rounded">Beginner</span>
+                                        </div>
+                                        <p class="text-gray-600 text-sm mb-4">Practice restaurant vocabulary and phrases for ordering meals.</p>
+                                        <div class="flex items-center text-sm text-gray-500 mb-4">
+                                            <svg class="w-4 h-4 mr-1" fill="currentColor" viewBox="0 0 20 20">
+                                                <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm1-12a1 1 0 10-2 0v4a1 1 0 00.293.707l2.828 2.829a1 1 0 101.415-1.415L11 9.586V6z" clip-rule="evenodd"></path>
+                                            </svg>
+                                            <span>10-15 minutes</span>
+                                        </div>
+                                        <button onclick="showPage('topic-prep')" class="w-full px-4 py-2 bg-indigo-600 text-white font-medium rounded hover:bg-indigo-700 transition-colors">Start</button>
+                                    </div>
+                                </div>
+                                
+                                <!-- Language Card 2 -->
+                                <div class="bg-white rounded-lg shadow overflow-hidden transition-all duration-300 hover:shadow-lg">
+                                    <div class="h-32 bg-gradient-to-r from-red-500 to-pink-600 flex items-center justify-center">
+                                        <div class="text-white text-4xl font-bold">🇪🇸</div>
+                                    </div>
+                                    <div class="p-4">
+                                        <div class="flex justify-between items-center mb-2">
+                                            <h3 class="font-bold text-lg text-gray-800">Spanish: Travel Talk</h3>
+                                            <span class="bg-yellow-100 text-yellow-800 text-xs px-2 py-1 rounded">Intermediate</span>
+                                        </div>
+                                        <p class="text-gray-600 text-sm mb-4">Learn to navigate transportation, hotels, and tourist attractions.</p>
+                                        <div class="flex items-center text-sm text-gray-500 mb-4">
+                                            <svg class="w-4 h-4 mr-1" fill="currentColor" viewBox="0 0 20 20">
+                                                <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm1-12a1 1 0 10-2 0v4a1 1 0 00.293.707l2.828 2.829a1 1 0 101.415-1.415L11 9.586V6z" clip-rule="evenodd"></path>
+                                            </svg>
+                                            <span>15-20 minutes</span>
+                                        </div>
+                                        <button onclick="showPage('topic-prep')" class="w-full px-4 py-2 bg-pink-600 text-white font-medium rounded hover:bg-pink-700 transition-colors">Start</button>
+                                    </div>
+                                </div>
+                                
+                                <!-- Language Card 3 -->
+                                <div class="bg-white rounded-lg shadow overflow-hidden transition-all duration-300 hover:shadow-lg">
+                                    <div class="h-32 bg-gradient-to-r from-blue-500 to-cyan-600 flex items-center justify-center">
+                                        <div class="text-white text-4xl font-bold">🇫🇷</div>
+                                    </div>
+                                    <div class="p-4">
+                                        <div class="flex justify-between items-center mb-2">
+                                            <h3 class="font-bold text-lg text-gray-800">French: Business Meeting</h3>
+                                            <span class="bg-red-100 text-red-800 text-xs px-2 py-1 rounded">Advanced</span>
+                                        </div>
+                                        <p class="text-gray-600 text-sm mb-4">Practice professional vocabulary and negotiation skills.</p>
+                                        <div class="flex items-center text-sm text-gray-500 mb-4">
+                                            <svg class="w-4 h-4 mr-1" fill="currentColor" viewBox="0 0 20 20">
+                                                <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm1-12a1 1 0 10-2 0v4a1 1 0 00.293.707l2.828 2.829a1 1 0 101.415-1.415L11 9.586V6z" clip-rule="evenodd"></path>
+                                            </svg>
+                                            <span>20-25 minutes</span>
+                                        </div>
+                                        <button onclick="showPage('topic-prep')" class="w-full px-4 py-2 bg-blue-600 text-white font-medium rounded hover:bg-blue-700 transition-colors">Start</button>
+                                    </div>
+                                </div>
+                                
+                                <!-- Language Card 4 -->
+                                <div class="bg-white rounded-lg shadow overflow-hidden transition-all duration-300 hover:shadow-lg">
+                                    <div class="h-32 bg-gradient-to-r from-yellow-500 to-red-600 flex items-center justify-center">
+                                        <div class="text-white text-4xl font-bold">🇨🇳</div>
+                                    </div>
+                                    <div class="p-4">
+                                        <div class="flex justify-between items-center mb-2">
+                                            <h3 class="font-bold text-lg text-gray-800">Mandarin: Introductions</h3>
+                                            <span class="bg-green-100 text-green-800 text-xs px-2 py-1 rounded">Beginner</span>
+                                        </div>
+                                        <p class="text-gray-600 text-sm mb-4">Learn basic greetings and how to introduce yourself.</p>
+                                        <div class="flex items-center text-sm text-gray-500 mb-4">
+                                            <svg class="w-4 h-4 mr-1" fill="currentColor" viewBox="0 0 20 20">
+                                                <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm1-12a1 1 0 10-2 0v4a1 1 0 00.293.707l2.828 2.829a1 1 0 101.415-1.415L11 9.586V6z" clip-rule="evenodd"></path>
+                                            </svg>
+                                            <span>10-15 minutes</span>
+                                        </div>
+                                        <button onclick="showPage('topic-prep')" class="w-full px-4 py-2 bg-red-600 text-white font-medium rounded hover:bg-red-700 transition-colors">Start</button>
+                                    </div>
+                                </div>
+                                
+                                <!-- Language Card 5 -->
+                                <div class="bg-white rounded-lg shadow overflow-hidden transition-all duration-300 hover:shadow-lg">
+                                    <div class="h-32 bg-gradient-to-r from-green-500 to-teal-600 flex items-center justify-center">
+                                        <div class="text-white text-4xl font-bold">🇬🇧</div>
+                                    </div>
+                                    <div class="p-4">
+                                        <div class="flex justify-between items-center mb-2">
+                                            <h3 class="font-bold text-lg text-gray-800">English: Job Interview</h3>
+                                            <span class="bg-yellow-100 text-yellow-800 text-xs px-2 py-1 rounded">Intermediate</span>
+                                        </div>
+                                        <p class="text-gray-600 text-sm mb-4">Practice answering common interview questions confidently.</p>
+                                        <div class="flex items-center text-sm text-gray-500 mb-4">
+                                            <svg class="w-4 h-4 mr-1" fill="currentColor" viewBox="0 0 20 20">
+                                                <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm1-12a1 1 0 10-2 0v4a1 1 0 00.293.707l2.828 2.829a1 1 0 101.415-1.415L11 9.586V6z" clip-rule="evenodd"></path>
+                                            </svg>
+                                            <span>15-20 minutes</span>
+                                        </div>
+                                        <button onclick="showPage('topic-prep')" class="w-full px-4 py-2 bg-teal-600 text-white font-medium rounded hover:bg-teal-700 transition-colors">Start</button>
+                                    </div>
+                                </div>
+                                
+                                <!-- Language Card 6 -->
+                                <div class="bg-white rounded-lg shadow overflow-hidden transition-all duration-300 hover:shadow-lg">
+                                    <div class="h-32 bg-gradient-to-r from-purple-500 to-violet-600 flex items-center justify-center">
+                                        <div class="text-white text-4xl font-bold">🇪🇸</div>
+                                    </div>
+                                    <div class="p-4">
+                                        <div class="flex justify-between items-center mb-2">
+                                            <h3 class="font-bold text-lg text-gray-800">Spanish: Daily Routines</h3>
+                                            <span class="bg-green-100 text-green-800 text-xs px-2 py-1 rounded">Beginner</span>
+                                        </div>
+                                        <p class="text-gray-600 text-sm mb-4">Discuss everyday activities and schedules in Spanish.</p>
+                                        <div class="flex items-center text-sm text-gray-500 mb-4">
+                                            <svg class="w-4 h-4 mr-1" fill="currentColor" viewBox="0 0 20 20">
+                                                <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm1-12a1 1 0 10-2 0v4a1 1 0 00.293.707l2.828 2.829a1 1 0 101.415-1.415L11 9.586V6z" clip-rule="evenodd"></path>
+                                            </svg>
+                                            <span>10-15 minutes</span>
+                                        </div>
+                                        <button onclick="showPage('topic-prep')" class="w-full px-4 py-2 bg-violet-600 text-white font-medium rounded hover:bg-violet-700 transition-colors">Start</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Topic Preparation Page -->
+            <div id="topic-prep" class="page hidden py-16">
+                <div class="container mx-auto px-4">
+                    <div class="max-w-5xl mx-auto">
+                        <div class="flex flex-col md:flex-row bg-white rounded-xl shadow-lg overflow-hidden">
+                            <div class="md:w-1/2 p-8 bg-indigo-50">
+                                <h2 class="text-2xl font-bold mb-6 text-gray-800">Physics: Forces & Motion</h2>
+                                <div class="mb-6">
+                                    <svg class="w-full max-w-md mx-auto" viewBox="0 0 400 300" xmlns="http://www.w3.org/2000/svg">
+                                        <circle cx="200<script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'941bf5d80645f581',t:'MTc0NzU3NzY2MC4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script>
